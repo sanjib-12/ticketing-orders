@@ -3,10 +3,10 @@ import 'express-async-errors'
 import cookieSession from 'cookie-session';
 import { errorHandler, NotFoundError, currentUSer } from '@sbmytickets/common';
 
-import { createTicketRouter } from './routes/new';
-import { showTicketRouter } from './routes/show';
-import { indexTicketRouter } from './routes/index';
-import { updateTicketRouter } from './routes/update';
+import { deleteOrderRouter } from './routes/delete';
+import { showOrderRouter } from './routes/show';
+import { newOrderRouter } from './routes/new';
+import { indexOrderRouter } from './routes';
 
 const app = express();
 app.set('trust proxy', true);
@@ -19,10 +19,10 @@ app.use(
 )
 app.use(currentUSer);
 
-app.use(createTicketRouter);
-app.use(showTicketRouter);
-app.use(indexTicketRouter);
-app.use(updateTicketRouter);
+app.use(deleteOrderRouter);
+app.use(newOrderRouter);
+app.use(indexOrderRouter);
+app.use(showOrderRouter);
 
 app.all('*',async() =>{
    throw new NotFoundError()
